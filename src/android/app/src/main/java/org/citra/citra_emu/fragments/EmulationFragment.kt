@@ -56,6 +56,7 @@ import com.google.android.material.slider.Slider
 import java.io.File
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.Dispatchers
 import org.citra.citra_emu.CitraApplication
 import org.citra.citra_emu.EmulationNavigationDirections
 import org.citra.citra_emu.NativeLibrary
@@ -376,6 +377,37 @@ class EmulationFragment : Fragment(), SurfaceHolder.Callback, Choreographer.Fram
                     val action = EmulationNavigationDirections
                         .actionGlobalCheatsActivity(NativeLibrary.getRunningTitleId())
                     binding.root.findNavController().navigate(action)
+                    true
+                }
+
+                R.id.menu_delete_shader_cache -> {
+                    MaterialAlertDialogBuilder(requireContext())
+                        .setTitle(R.string.delete_all_shader_cache)
+                        .setMessage(R.string.delete_all_shader_cache_confirm)
+                        .setPositiveButton(android.R.string.ok) { _, _ ->
+                            val progToast = Toast.makeText(
+                                CitraApplication.appContext,
+                                R.string.deleting_all_shader_cache,
+                                Toast.LENGTH_LONG
+                            )
+                            progToast.show()
+
+                            lifecycleScope.launch(Dispatchers.IO) {
+                                NativeLibrary.deleteShaderCacheDirectory()
+                                activity?.runOnUiThread {
+                                    progToast.cancel()
+                                    Toast.makeText(
+                                        CitraApplication.appContext,
+                                        R.string.all_shader_cache_deleted,
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            }
+                        }
+                        .setNegativeButton(android.R.string.cancel) { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                        .show()
                     true
                 }
 

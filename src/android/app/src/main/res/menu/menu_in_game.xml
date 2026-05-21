@@ -53,6 +53,11 @@
         android:title="@string/cheats" />
 
     <item
+        android:id="@+id/menu_delete_shader_cache"
+        android:icon="@drawable/ic_delete"
+        android:title="@string/delete_all_shader_cache" />
+
+    <item
         android:id="@+id/menu_settings"
         android:icon="@drawable/ic_settings"
         android:title="@string/preferences_settings" />

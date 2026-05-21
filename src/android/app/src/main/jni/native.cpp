@@ -1170,4 +1170,23 @@ void Java_org_citra_citra_1emu_NativeLibrary_deleteVulkanShaderCache(JNIEnv* env
         });
 }
 
+static void DeleteDirRecursively(const std::string& dir_path) {
+    FileUtil::ForeachDirectoryEntry(
+        nullptr, dir_path,
+        []([[maybe_unused]] u64* num_entries_out, const std::string& directory,
+           const std::string& virtual_name) {
+            std::string path = directory + DIR_SEP + virtual_name;
+            DeleteDirRecursively(path);
+            return true;
+        });
+    LOG_INFO(Frontend, "Deleting shader cache directory: {}", dir_path);
+    FileUtil::Delete(dir_path);
+}
+
+void Java_org_citra_citra_1emu_NativeLibrary_deleteShaderCacheDirectory(JNIEnv* env, jobject obj) {
+    const std::string shader_dir = FileUtil::GetUserPath(FileUtil::UserPath::ShaderDir);
+    LOG_INFO(Frontend, "Deleting entire shader cache directory: {}", shader_dir);
+    DeleteDirRecursively(shader_dir);
+}
+
 } // extern "C"

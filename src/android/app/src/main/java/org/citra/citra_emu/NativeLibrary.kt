@@ -261,6 +261,7 @@ object NativeLibrary {
 
     external fun deleteOpenGLShaderCache(titleId: Long)
     external fun deleteVulkanShaderCache(titleId: Long)
+    external fun deleteShaderCacheDirectory()
 
     private var coreErrorAlertResult = false
     private val coreErrorAlertLock = Object()

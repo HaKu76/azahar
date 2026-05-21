@@ -3,7 +3,12 @@
 
     <!-- General application strings -->
     <string name="app_name" translatable="false">Azahar</string>
-    <string name="app_disclaimer">This software will run applications for the Nintendo 3DS handheld game console. No game titles are included.\n\nBefore you can begin with emulating, please select a folder to store Azahar\'s user data in.\n\nWhat\'s this:\n<a href='https://web.archive.org/web/20240304193549/https://github.com/citra-emu/citra/wiki/Citra-Android-user-data-and-storage'>Wiki - Citra Android user data and storage</a></string>
+    <string name="app_disclaimer">This software will run applications for the Nintendo 3DS handheld game console. No game titles are included.
+
+Before you can begin with emulating, please select a folder to store Azahar\'s user data in.
+
+What\'s this:
+<a href='https://web.archive.org/web/20240304193549/https://github.com/citra-emu/citra/wiki/Citra-Android-user-data-and-storage'>Wiki - Citra Android user data and storage</a></string>
     <string name="app_notification_channel_name" translatable="false">Azahar</string>
     <string name="app_notification_channel_id" translatable="false">Azahar</string>
     <string name="app_notification_channel_description">Azahar 3DS emulator notifications</string>
@@ -96,7 +101,13 @@
     <string name="warning_cancel">Cancel</string>
     <string name="select_citra_user_folder">Select User Folder</string>
     <string name="select_citra_user_folder_description"><![CDATA[Select your <a href="https://web.archive.org/web/20240304193549/https://github.com/citra-emu/citra/wiki/Citra-Android-user-data-and-storage">user data</a> directory with the button below.]]></string>
-    <string name="select_which_user_directory_to_use">You appear to have user directories set for both Lime3DS and Azahar. This is likely because you upgraded to Azahar, and when prompted chose a different user directory than what was being used for Lime3DS.\n\nThis may have resulted in you thinking you lost saves or other settings - we apologize if that happened.\n\nWould you like to go back to using your original Lime3DS user directory, restoring settings and save games from Lime3DS, or keep your current Azahar user directory?\n\nNeither directory will be deleted, regardless of your choice, and you may freely switch between them using the Select User Folder option.</string>
+    <string name="select_which_user_directory_to_use">You appear to have user directories set for both Lime3DS and Azahar. This is likely because you upgraded to Azahar, and when prompted chose a different user directory than what was being used for Lime3DS.
+
+This may have resulted in you thinking you lost saves or other settings - we apologize if that happened.
+
+Would you like to go back to using your original Lime3DS user directory, restoring settings and save games from Lime3DS, or keep your current Azahar user directory?
+
+Neither directory will be deleted, regardless of your choice, and you may freely switch between them using the Select User Folder option.</string>
     <string name="keep_current_azahar_directory">Keep Current Azahar Directory</string>
     <string name="use_prior_lime3ds_directory">Use Prior Lime3DS Directory</string>
     <string name="select">Select</string>
@@ -623,6 +634,11 @@
     <string name="delete_cache_select_backend">Select which graphics API to delete the shader cache</string>
     <string name="deleting_shader_cache">Deleting shader cache for title, please wait…</string>
     <string name="shader_cache_deleted">Shader cache deleted</string>
+    <string name="delete_all_shader_cache">Delete All Shader Cache</string>
+    <string name="delete_all_shader_cache_description">Delete all shader cache files for every title</string>
+    <string name="delete_all_shader_cache_confirm">This will delete the entire shader cache folder, including cache for all titles. Are you sure?</string>
+    <string name="deleting_all_shader_cache">Deleting all shader cache, please wait…</string>
+    <string name="all_shader_cache_deleted">All shader cache deleted</string>
 
     <!-- About Game Dialog -->
     <string name="play">Play</string>
