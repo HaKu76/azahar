@@ -411,6 +411,65 @@ class EmulationFragment : Fragment(), SurfaceHolder.Callback, Choreographer.Fram
                     true
                 }
 
+                R.id.menu_export_dcim -> {
+                    val userDir = NativeLibrary.getUserDirectory()
+                    val sourceDir = File(userDir, "sdmc/DCIM")
+
+                    if (!sourceDir.exists() || !sourceDir.isDirectory) {
+                        Toast.makeText(
+                            CitraApplication.appContext,
+                            R.string.export_dcim_photos_not_found,
+                            Toast.LENGTH_LONG
+                        ).show()
+                        true
+                    } else {
+                        MaterialAlertDialogBuilder(requireContext())
+                            .setTitle(R.string.export_dcim_photos)
+                            .setMessage(R.string.export_dcim_photos_confirm)
+                            .setPositiveButton(android.R.string.ok) { _, _ ->
+                                val progToast = Toast.makeText(
+                                    CitraApplication.appContext,
+                                    R.string.exporting_dcim_photos,
+                                    Toast.LENGTH_LONG
+                                )
+                                progToast.show()
+
+                                lifecycleScope.launch(Dispatchers.IO) {
+                                    try {
+                                        val targetDir = File(
+                                            android.os.Environment.getExternalStorageDirectory(),
+                                            "DCIM"
+                                        )
+                                        moveDirectory(sourceDir, targetDir)
+                                        activity?.runOnUiThread {
+                                            progToast.cancel()
+                                            Toast.makeText(
+                                                CitraApplication.appContext,
+                                                R.string.export_dcim_photos_success,
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
+                                    } catch (e: Exception) {
+                                        Log.error("[EmulationFragment] DCIM export failed: ${e.message}")
+                                        activity?.runOnUiThread {
+                                            progToast.cancel()
+                                            Toast.makeText(
+                                                CitraApplication.appContext,
+                                                R.string.export_dcim_photos_failed,
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
+                                    }
+                                }
+                            }
+                            .setNegativeButton(android.R.string.cancel) { dialog, _ ->
+                                dialog.dismiss()
+                            }
+                            .show()
+                        true
+                    }
+                }
+
                 R.id.menu_settings -> {
                     SettingsActivity.launch(
                         requireContext(),
@@ -1614,5 +1673,28 @@ class EmulationFragment : Fragment(), SurfaceHolder.Callback, Choreographer.Fram
 
     companion object {
         private val perfStatsUpdateHandler = Handler(Looper.myLooper()!!)
+
+        /**
+         * Recursively moves a directory from source to target.
+         * Copies all files first, then deletes the source if successful.
+         */
+        private fun moveDirectory(source: File, target: File) {
+            if (!source.exists()) return
+
+            if (!target.exists()) {
+                target.mkdirs()
+            }
+
+            source.listFiles()?.forEach { file ->
+                if (file.isDirectory) {
+                    moveDirectory(file, File(target, file.name))
+                } else {
+                    file.copyTo(File(target, file.name), overwrite = true)
+                }
+            }
+
+            // Delete source after successful copy
+            source.deleteRecursively()
+        }
     }
 }

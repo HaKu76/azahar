@@ -640,6 +640,15 @@ Neither directory will be deleted, regardless of your choice, and you may freely
     <string name="deleting_all_shader_cache">Deleting all shader cache, please wait…</string>
     <string name="all_shader_cache_deleted">All shader cache deleted</string>
 
+    <!-- Export DCIM Photos -->
+    <string name="export_dcim_photos">导出相册</string>
+    <string name="export_dcim_photos_description">将 3DS 拍摄的照片导出到手机相册</string>
+    <string name="export_dcim_photos_confirm">这将把 sdmc/DCIM 中的照片移动到手机存储的 DCIM 目录中。移动后原文件夹将被删除。是否继续？</string>
+    <string name="exporting_dcim_photos">正在导出照片，请稍候…</string>
+    <string name="export_dcim_photos_success">照片已成功导出到 DCIM 目录</string>
+    <string name="export_dcim_photos_not_found">未找到 DCIM 文件夹，请确保已使用 3DS 相机拍摄照片</string>
+    <string name="export_dcim_photos_failed">导出照片失败</string>
+
     <!-- About Game Dialog -->
     <string name="play">Play</string>
     <string name="uninstall_cia">Uninstall Application</string>
